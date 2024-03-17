@@ -20,33 +20,31 @@ class _UsersScreenState extends ConsumerState<UsersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Consumer(
-      builder: (context, ref, child) {
-        final data = ref.watch(userProvider);
-        return data.userLoader
-            ? const Expanded(
-                child: Center(
+    return Scaffold(
+      body: Consumer(
+        builder: (context, ref, child) {
+          final data = ref.watch(userProvider);
+          return data.userLoader
+              ? const Center(
                   child: CircularProgressIndicator(),
-                ),
-              )
-            : ListView.builder(
-                shrinkWrap: true,
-                itemCount: data.userList.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => UserDetailsScreen(
-                                user: data.userList[index],
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: data.userList.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UserDetailsScreen(
+                                  user: data.userList[index],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        child: Flexible(
+                            );
+                          },
                           child: Container(
                             color: Colors.grey,
                             padding: const EdgeInsets.all(10),
@@ -62,15 +60,15 @@ class _UsersScreenState extends ConsumerState<UsersScreen> {
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      )
-                    ],
-                  );
-                },
-              );
-      },
-    ));
+                        const SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    );
+                  },
+                );
+        },
+      ),
+    );
   }
 }
